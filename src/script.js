@@ -14,7 +14,7 @@ async function get_currently_playing() {
 }
 
 function spotify_to_metadata_string(data) {
-    return data["name"];
+    return data["item"]["name"];
 }
 
 async function youtube_search(query) {
@@ -29,6 +29,7 @@ async function youtube_search(query) {
 
 async function open_video() {
     var currently_playing = await get_currently_playing();
+    console.log(currently_playing);
     var metadata_string = spotify_to_metadata_string(currently_playing);
     var video_id = await youtube_search(metadata_string);
     window.open("https://youtu.be/"+video_id, '_blank').focus();
