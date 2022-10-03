@@ -32,5 +32,5 @@ async function open_video() {
     console.log(currently_playing);
     var metadata_string = spotify_to_metadata_string(currently_playing);
     var video_id = await youtube_search(metadata_string);
-    window.open("https://youtu.be/"+video_id, '_blank').focus();
+    window.open("https://www.youtube.com/embed/"+video_id, '_blank').focus();
 }
