@@ -8,7 +8,7 @@ Plays a music video from YouTube from your current Spotify song.
 1. Go to [https://developer.spotify.com/dashboard/applications](https://developer.spotify.com/dashboard/applications)
 2. Choose "CREATE AN APP"
 3. Fill in app name and description
-4. Click "???"
+4. Click "Create"
 5. "EDIT SETTINGS"
 6. Add the redirect uri "http://localhost:5000/"
 7. Copy EXAMPLE_CONFIG.py to `CONFIG.py`
