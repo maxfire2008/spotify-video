@@ -4,6 +4,8 @@ Plays a music video from YouTube from your current Spotify song.
 
 :warning: You need fast internet (low ping). It works fine for my 35 ms. This is because of how Spotify sends playback status data.
 
+:warning: Some songs may be broken - please report here
+
 ## How to use
 1. Go to [https://developer.spotify.com/dashboard/applications](https://developer.spotify.com/dashboard/applications)
 2. Choose "CREATE AN APP"
@@ -18,4 +20,5 @@ Plays a music video from YouTube from your current Spotify song.
 
 ## to-do
 * [ ] make time sync more accurate
+* [ ] Implement Win32 API to get exact time from spotify desktop
 * [ ] do not use `info["requested_formats"][0]["url"]` because `[0]` might cause issues

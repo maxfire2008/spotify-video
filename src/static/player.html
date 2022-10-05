@@ -1,7 +1,24 @@
 <!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        html,
+        body {
+            height: 98%;
+        }
+
+        #video_player {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            max-width: 95vw;
+            max-height: 90vh;
+        }
+    </style>
+</head>
 <body>
     <p id="notes_field"></p>
-    <video id="video_player"></video>
+    <video id="video_player" controls></video>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
     <script src="video_overrides.js"></script>
     <script src="script.js"></script>
