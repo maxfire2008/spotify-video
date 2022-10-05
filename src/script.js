@@ -1,8 +1,8 @@
-var video_player;
+var video_player = document.getElementById("video_player");
 
 async function get_currently_playing() {
     var result = await fetch(
-        "https://api.spotify.com/v1/me/player/currently-playing",
+        "https://api.spotify.com/v1/me/player",
         {
             headers: {
                 Accept: "application/json",
@@ -33,48 +33,45 @@ async function youtube_search(query) {
     return await result.text();
 }
 
-async function update() {
+function load_video(target_video_id) {
+    video_player.src =
+        "http://localhost:5000/video_redirect/" + target_video_id;
+    video_player_load_promise = new Promise((resolve) => {
+        video_player.addEventListener('loadeddata', resolve, false);
+    });
+    return video_player_load_promise
+}
+
+async function time_sync() {
     var currently_playing = await get_currently_playing();
-    console.log(currently_playing);
     var metadata_string = spotify_to_metadata_string(currently_playing);
     var target_video_id = await youtube_search(metadata_string);
 
-    if (true) {
-        video_player = new YT.Player("video_player", {
-            height: "390",
-            width: "640",
-            videoId: target_video_id,
-            playerVars: {
-                playsinline: 1,
-            },
-            events: {
-                onReady: function (event) {
-                    event.target.mute();
-                },
-                onStateChange: function (event) {
-                    correct_time =
-                        (new Date().getTime() -
-                            (currently_playing["timestamp"] -
-                                currently_playing["progress_ms"])) /
-                        1000;
-                    correct_time = correct_time - 10;
-                    console.log(
-                        correct_time
-                    );
-                    console.log(
-                        event.target.getCurrentTime()
-                    );
-                    if (
-                        Math.abs(correct_time - event.target.getCurrentTime()) > 0.1
-                    ) {
-                        event.target.seekTo(correct_time, true);
-                    }
-                },
-            },
-        });
+    if (!video_player.src.includes(target_video_id)) {
+        await load_video(target_video_id);
     }
 
-    // https://www.youtube.com/embed/lrzKT-dFUjE?start=70
+    // console.log(currently_playing);
+    progress_ms = currently_playing["progress_ms"];
+    timestamp = currently_playing["timestamp"];
+
+    progress.textContent = progress_ms;
+
+    video_player.currentTime = progress_ms/1000;
+    
+    setTimeout(time_sync, 100);
+
+    console.log(
+        "timestamp   :",
+        timestamp
+    );
+
+    console.log(
+        "current_time:",
+        new Date().getTime()
+    );
+
+    // video_player.currentTime = 30
 }
 
 async function open_video() {
