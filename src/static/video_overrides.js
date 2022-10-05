@@ -13,11 +13,16 @@ var video_overrides = {
     // Butter (Swiss001)
     "spotify:track:44hsOC1nquAJAloWHdosf1": {
         youtube_video_id: "8ENxcE0on5A",
-        notes: "Official, found manually"
+        notes: "Official, found manually",
+    },
+    // White & Nerdy (Parody of "Ridin'" by Chamillionaire feat. Krayzie Bone)
+    "spotify:track:60R2v9lheAu3lwZwAFxMZK": {
+        youtube_video_id: "N9qYF9DZPdw",
+        notes: "Official, found manually",
     },
     // Soul Bossa Nova
     "spotify:track:0Jw3cPBXlGnA6DEJrZSTI0": {
         youtube_video_id: "zd11cRuljMk",
-        notes: "No official video, sync N/A"
+        notes: "No official video, sync N/A",
     },
 };
