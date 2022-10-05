@@ -1,2 +1,4 @@
-src/secrets.js
+src/CONFIG.*
 ***/__pycache__/***
+src/.cache
+src/flask_session
