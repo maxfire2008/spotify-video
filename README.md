@@ -11,6 +11,10 @@ Plays a music video from YouTube from your current Spotify song.
 4. Click "???"
 5. "EDIT SETTINGS"
 6. Add the redirect uri "http://localhost:5000/"
+7. Copy EXAMPLE_CONFIG.py to `CONFIG.py`
+8. Copy the client id and secret into `CONFIG.py`
+9. Fill the value FLASK_SESSION_KEY with the output of `__import__("os").urandom(64)` (or and random content)
+10. Use [fd](https://blog.maxstuff.net/2022/08/make-flask-development-easier-with-this.html) to start a flask server (or any other WSGI)
 
 ## to-do
 * [ ] make time sync more accurate
