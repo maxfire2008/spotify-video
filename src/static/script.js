@@ -1,5 +1,6 @@
 var host = window.location.protocol + "//" + window.location.host;
 var video_player = document.getElementById("video_player");
+var notes_field = document.getElementById("notes_field");
 var last_adjust = 0;
 
 async function get_currently_playing() {
@@ -27,15 +28,7 @@ async function youtube_search(query) {
     return await result.text();
 }
 
-function load_video(target_video_id) {
-    video_player.src = host + "/video_redirect/" + target_video_id;
-    video_player_load_promise = new Promise((resolve) => {
-        video_player.addEventListener("loadeddata", resolve, false);
-    });
-    return video_player_load_promise;
-}
-
-function load_from_search(video_player_src) {
+function load_video(video_player_src) {
     video_player.src = video_player_src;
     video_player_load_promise = new Promise((resolve) => {
         video_player.addEventListener("loadeddata", resolve, false);
@@ -45,22 +38,25 @@ function load_from_search(video_player_src) {
 
 async function time_sync() {
     let currently_playing = await get_currently_playing();
-    console.log(currently_playing);
 
-    if (video_overrides[currently_playing["item"]["uri"]]["youtube_video_id"]) {
+    if (
+        video_overrides[currently_playing["item"]["uri"]] &&
+        video_overrides[currently_playing["item"]["uri"]]["youtube_video_id"]
+    ) {
         var video_player_src =
             host +
             "/video_redirect/" +
-            video_overrides[currently_playing["item"]["uri"]]["youtube_video_id"];
+            video_overrides[currently_playing["item"]["uri"]][
+                "youtube_video_id"
+            ];
     } else {
         let metadata_string = spotify_to_metadata_string(currently_playing);
-        let query = metadata_string;
 
         var video_player_src =
             host +
             "/video_redirect?" +
             new URLSearchParams({
-                query: query,
+                query: metadata_string,
             });
     }
 
@@ -70,11 +66,34 @@ async function time_sync() {
     // let target_video_id = await youtube_search(metadata_string);
 
     if (video_player.src !== video_player_src) {
-        await load_from_search(video_player_src);
+        await load_video(video_player_src);
+        if (
+            video_overrides[currently_playing["item"]["uri"]] &&
+            video_overrides[currently_playing["item"]["uri"]]["notes"]
+        ) {
+            notes_field.textContent =
+                video_overrides[currently_playing["item"]["uri"]]["notes"];
+        } else {
+            let metadata_string = spotify_to_metadata_string(currently_playing);
+            notes_field.textContent =
+                "Automatically found by search for '" +
+                metadata_string +
+                "'";
+            log_override(currently_playing);
+        }
     }
 
     // console.log(currently_playing);
-    progress_ms = currently_playing["progress_ms"];
+    if (
+        video_overrides[currently_playing["item"]["uri"]] &&
+        video_overrides[currently_playing["item"]["uri"]]["offset"]
+    ) {
+        progress_ms =
+            currently_playing["progress_ms"] +
+            video_overrides[currently_playing["item"]["uri"]]["offset"];
+    } else {
+        progress_ms = currently_playing["progress_ms"];
+    }
     timestamp = currently_playing["timestamp"];
 
     if (currently_playing["is_playing"]) {
@@ -83,7 +102,7 @@ async function time_sync() {
         video_player.pause();
     }
 
-    progress.textContent = progress_ms;
+    // progress.textContent = progress_ms;
 
     // video_player.currentTime = progress_ms / 1000;
     adjust_if_different_by(progress_ms / 1000, 0.25);
@@ -114,10 +133,35 @@ function adjust_if_different_by(adjust_to, threshold) {
 
 async function open_video() {
     let currently_playing = await get_currently_playing();
-    console.log(currently_playing);
+    if (
+        video_overrides[currently_playing["item"]["uri"]] &&
+        video_overrides[currently_playing["item"]["uri"]]["youtube_video_id"]
+    ) {
+        let video_id =
+            video_overrides[currently_playing["item"]["uri"]][
+                "youtube_video_id"
+            ];
+        window.open("https://youtu.be/" + video_id, "_blank").focus();
+    } else {
+        let metadata_string = spotify_to_metadata_string(currently_playing);
+
+        let video_id = await youtube_search(metadata_string);
+        window.open("https://youtu.be/" + video_id, "_blank").focus();
+    }
+}
+
+async function log_override(currently_playing) {
     let metadata_string = spotify_to_metadata_string(currently_playing);
     let video_id = await youtube_search(metadata_string);
-    window.open("https://www.youtube.com/embed/" + video_id, "_blank").focus();
+    console.log(
+        "    // " +
+            metadata_string +
+            '\n    "' +
+            currently_playing["item"]["uri"] +
+            '": {\n        youtube_video_id: "' +
+            video_id +
+            '",\n        notes: "Automatically found, manually confirmed"\n    },'
+    );
 }
 
 time_sync();

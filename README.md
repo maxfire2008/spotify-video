@@ -10,7 +10,7 @@ Plays a music video from YouTube from your current Spotify song.
 3. Fill in app name and description
 4. Click "???"
 5. "EDIT SETTINGS"
-6. Add the redirect uri "http://localhost:5000
+6. Add the redirect uri "http://localhost:5000/"
 
 ## to-do
 * [ ] make time sync more accurate
