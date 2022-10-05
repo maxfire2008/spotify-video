@@ -45,16 +45,24 @@ function load_from_search(video_player_src) {
 
 async function time_sync() {
     let currently_playing = await get_currently_playing();
-    // console.log(currently_playing);
-    let metadata_string = spotify_to_metadata_string(currently_playing);
-    let query = metadata_string;
+    console.log(currently_playing);
 
-    let video_player_src =
-        host +
-        "/video_redirect?" +
-        new URLSearchParams({
-            query: query,
-        });
+    if (video_overrides[currently_playing["item"]["uri"]]["youtube_video_id"]) {
+        var video_player_src =
+            host +
+            "/video_redirect/" +
+            video_overrides[currently_playing["item"]["uri"]]["youtube_video_id"];
+    } else {
+        let metadata_string = spotify_to_metadata_string(currently_playing);
+        let query = metadata_string;
+
+        var video_player_src =
+            host +
+            "/video_redirect?" +
+            new URLSearchParams({
+                query: query,
+            });
+    }
 
     // console.log(search);
     // console.log(video_player_src);
