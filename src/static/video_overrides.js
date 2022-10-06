@@ -25,4 +25,10 @@ var video_overrides = {
         youtube_video_id: "zd11cRuljMk",
         notes: "No official video, sync N/A",
     },
+    // Here Comes My Arrow
+    "spotify:track:5fd2xbd39A0iEfZdx4zxt6": {
+        youtube_video_id: "BunrJFs3g6Y",
+        notes: "Automatically found, manually synced",
+        offset: 4904,
+    },
 };
