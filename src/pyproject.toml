@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "spotify-video"
+version = "0.1.0"
+description = ""
+authors = ["maxfire2008 <22722054+maxfire2008@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+yt-dlp = "^2022.10.4"
+spotipy = "^2.21.0"
+mistletoe = "^0.9.0"
+
+[tool.poetry.dev-dependencies]
+Flask = "^2.2.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

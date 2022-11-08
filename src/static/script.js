@@ -1,6 +1,7 @@
 var host = window.location.protocol + "//" + window.location.host;
 var video_player = document.getElementById("video_player");
 var notes_field = document.getElementById("notes_field");
+var ms_offset = document.getElementById("ms_offset");
 var last_adjust = 0;
 
 async function get_currently_playing() {
@@ -76,9 +77,7 @@ async function time_sync() {
         } else {
             let metadata_string = spotify_to_metadata_string(currently_playing);
             notes_field.textContent =
-                "Automatically found by search for '" +
-                metadata_string +
-                "'";
+                "Automatically found by search for '" + metadata_string + "'";
             log_override(currently_playing);
         }
     }
@@ -90,9 +89,11 @@ async function time_sync() {
     ) {
         progress_ms =
             currently_playing["progress_ms"] +
-            video_overrides[currently_playing["item"]["uri"]]["offset"];
+            video_overrides[currently_playing["item"]["uri"]]["offset"] +
+            Number(ms_offset.value);
     } else {
-        progress_ms = currently_playing["progress_ms"];
+        progress_ms =
+            currently_playing["progress_ms"] + Number(ms_offset.value);
     }
     timestamp = currently_playing["timestamp"];
 

@@ -31,4 +31,10 @@ var video_overrides = {
         notes: "Automatically found, manually synced",
         offset: 4904,
     },
+    // Count to Three
+    "spotify:track:6E3TudlZucyt2fxE8Ljgw6": {
+        youtube_video_id: "jpw2ebhTSKs",
+        notes: "Automatically found, manually synced",
+        offset: 1700,
+    },
 };
