@@ -1,8 +1,14 @@
 var video_overrides = {
+     // Video Killed The Radio Star
+    "spotify:track:7o7E1nrHWncYY7PY94gCiX": {
+        youtube_video_id: "W8r-tXRLazs",
+        notes: "Automatically found, manually confirmed"
+    },
     // Cara Mia Addio
     "spotify:track:1jf6G4tTZMgaroI0h40g6e": {
         youtube_video_id: "0KNQ2w06vPw",
         notes: "A recording of the official in the game (shorter than Spotify release)",
+        offset: 1500, //estimate
     },
     // Wet Hands C418
     "spotify:track:1tinoQpYXzpZDrb0BjK1e7": {
