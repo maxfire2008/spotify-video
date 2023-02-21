@@ -1,4 +1,9 @@
 var video_overrides = {
+     // The Chain - 2004 Remaster
+     "spotify:track:5e9TFTbltYBg2xThimr0rU": {
+         youtube_video_id: "kBYHwH1Vb-c",
+         notes: "Automatically found, manually confirmed"
+     },
      // Video Killed The Radio Star
     "spotify:track:7o7E1nrHWncYY7PY94gCiX": {
         youtube_video_id: "W8r-tXRLazs",
