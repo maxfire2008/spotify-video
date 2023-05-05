@@ -58,5 +58,6 @@ var video_overrides = {
     "spotify:track:3OhKBya9hv1PufHL0QBceV": {
         youtube_video_id: "C-u5WLJ9Yk4",
         notes: "Official, found manually"
+        offset: 16000,
     },
 };
