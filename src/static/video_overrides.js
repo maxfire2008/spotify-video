@@ -59,5 +59,5 @@ var video_overrides = {
         youtube_video_id: "C-u5WLJ9Yk4",
         notes: "Official, found manually"
         offset: 16000,
-    },
+    }
 };
