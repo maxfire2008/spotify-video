@@ -54,4 +54,9 @@ var video_overrides = {
         notes: "Automatically found, manually confirmed",
         offset: 3500,
     },
+    // ...Baby One More Time - Remastered
+    "spotify:track:3OhKBya9hv1PufHL0QBceV": {
+        youtube_video_id: "C-u5WLJ9Yk4",
+        notes: "Official, found manually"
+    },
 };
