@@ -48,4 +48,10 @@ var video_overrides = {
         notes: "Automatically found, manually synced",
         offset: 1700,
     },
+    // Bowsette
+    "spotify:track:3GJ5D2TaDJNVBFYysoaLdN": {
+        youtube_video_id: "xo0ky8FomoU",
+        notes: "Automatically found, manually confirmed",
+        offset: 3500,
+    },
 };
